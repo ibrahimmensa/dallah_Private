@@ -396,6 +396,8 @@ public class BoardHandler : MonoBehaviour
         AvailableCells.Clear();
         if (checkAllPiecesOnBoardForCombinations())
         {
+            ResetCellColor();
+            GameManager.Instance.currentPlayerState = TurnState.NONE;
             return;
         }
         foreach (CellHandler cell in allCells)
