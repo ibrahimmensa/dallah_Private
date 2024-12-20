@@ -9,6 +9,7 @@ public class BoardHandler : MonoBehaviour
     public List<CellHandler> allCells;
     public List<CellHandler> AvailableCells;
     public List<CellHandler> excludingPieces;
+    public List<CellHandler> animatedPieces;
     public int[] centerPiecesIndex;
     public GameObject opponentPiecePrefab;
     public GameObject playerPiecePrefab;
@@ -414,13 +415,21 @@ public class BoardHandler : MonoBehaviour
 
     public bool checkAllPiecesOnBoardForCombinations()
     {
+        foreach (CellHandler cell in animatedPieces)
+        {
+            cell.piece.animate(false);
+        }
+        animatedPieces.Clear();
         foreach (CellHandler cell in GameManager.Instance.placedPieces)
         {
             if (!excludingPieces.Contains(cell))
             {
                 if (checkCellStatusForCombination(cell))
                 {
+                    cell.piece.animate(true);
+                    animatedPieces.Add(cell);
                     Debug.Log("Combination on Cell: " + cell.cellNumber);
+                    //cell.piece.GetComponent<Animator>().SetBool("animate", true);
                     //ResetCellColor();
                     return true;
                 }

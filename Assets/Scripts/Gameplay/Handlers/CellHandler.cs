@@ -42,6 +42,10 @@ public class CellHandler : MonoBehaviour
         {
             GetComponent<Image>().color = Color.white;
             isAvailableForInteraction = false;
+            //if (isFill)
+            //{
+            //    piece.GetComponent<Animator>().SetBool("animate", false);
+            //}
         }
     }
 

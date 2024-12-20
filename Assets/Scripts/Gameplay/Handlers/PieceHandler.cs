@@ -18,4 +18,9 @@ public class PieceHandler : MonoBehaviour
     {
         
     }
+
+    public void animate(bool isAnimating)
+    {
+        GetComponent<Animator>().SetBool("animate", isAnimating);
+    }
 }

@@ -153,7 +153,7 @@ public class PlayerHandler : MonoBehaviour
                 MenuManager.Instance.gamePlayUIHandler.gameStatus.color = Color.red;
             }
         }
-        if (GameManager.Instance.player1.isTurn && GameManager.Instance.outsidePiecesCount <= 0)
+        if (GameManager.Instance.player1.isTurn/* && GameManager.Instance.outsidePiecesCount <= 0*/)
         {
             GameManager.Instance.boardHandler.ResetCellColor();
             GameManager.Instance.boardHandler.isThereACombinationOnBoard = false;
