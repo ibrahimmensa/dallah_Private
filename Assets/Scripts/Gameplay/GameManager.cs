@@ -113,13 +113,7 @@ public class GameManager : Singleton<GameManager>
             return;
         currentPlayerState = TurnState.ADDING_NEW_PIECE;
         if (isFirstTurn)
-        {
-            moveMade++;
-            if (moveMade == firstTurnMoveCount)
-            {
-                moveMade = 0;
-                isFirstTurn = false;
-            }
+        { 
             boardHandler.checkCenterPiecesForFirstMove();
         }
         else
@@ -149,7 +143,7 @@ public class GameManager : Singleton<GameManager>
     public void onCellClicked(CellHandler cell)
     {
         // player is either placing new piece or moving a selected piece
-        if (currentPlayerState == TurnState.ADDING_NEW_PIECE && cell.isAvailableForInteraction)
+        if (currentPlayerState == TurnState.ADDING_NEW_PIECE && cell.isAvailableForInteraction && !cell.isFill)
         {
             placedPieces.Add(cell);
             boardHandler.placeNewPiece(cell);
@@ -164,6 +158,16 @@ public class GameManager : Singleton<GameManager>
                 //player1.isTurn = false;
                 changeTurn();
                 //MenuManager.Instance.gamePlayUIHandler.updateGameStatus("Opponent Turn");
+            }
+            else
+            {
+                moveMade++;
+                if (moveMade == firstTurnMoveCount)
+                {
+                    moveMade = 0;
+                    isFirstTurn = false;
+                    changeTurn();
+                }
             }
         }
         else if (currentPlayerState == TurnState.MOVING_PIECE && cell.isAvailableForInteraction)
